@@ -38,17 +38,28 @@ export default class HomeScreen extends React.Component {
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             
-          <Text>Home!</Text>
+          <Text style={{ marginTop: 20, fontSize: 24 }}>Les Pizzas !</Text>
           <FlatList style={styles.flatView}
           data={this.state.dataSource}
-          renderItem={({item}) => <Text style={styles.item}>{item.product_name} onPress={() => this.props.navigation.navigate("Detail") }</Text>}
+          renderItem={({item}) =><View style={styles.item}>
+              
+            
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={styles.title} >{item.product_name} </Text>
+                <Image 
+          style={styles.images} 
+          source={{uri:item.image_front_thumb_url}}/>
+            </View>
+
+            <Button title= "Detail du produit"
+           onPress = {() => {this.props.navigation.navigate("Detail")}}/>
+          
+          </View>  }
+           
           keyExtractor={({id}, index) => id}
         />
         
-          <Button 
-                    onPress={() => this.props.navigation.navigate("Detail", {name: "Data pass"})} //BAH ALORS CA MARCHE PAS
-                    title= "Go to detail"
-                    />
+          
         </View>
       );
     }
@@ -56,17 +67,22 @@ export default class HomeScreen extends React.Component {
 
   const styles = StyleSheet.create({
     item: {
-      backgroundColor: '#5DCAE1',
+      backgroundColor: '#E5E5E5',
       padding: 20,
       marginVertical: 8,
       marginHorizontal: 16,
+    },
+    images: {
+        marginVertical: 8,
+        height: 180,
+        width: 180
     },
     flatView: {
         marginTop: 20,
         marginBottom: 20
     },
     title: {
-      fontSize: 32,
+      fontSize: 22,
     },
   });
 
