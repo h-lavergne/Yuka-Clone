@@ -6,11 +6,11 @@ class DetailScreen extends React.Component {
 
     render() {
       const { getParam } = this.props.navigation
-      let product = getParam('product').product
+      let product = getParam('product')
 
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>{ JSON.stringify(product, null, '') }</Text>
+        <Text>{ product.product.product_name }</Text>
           <Button title= "Go back to home"
            onPress = {() => {this.props.navigation.navigate("Home")}}/>
         </View>

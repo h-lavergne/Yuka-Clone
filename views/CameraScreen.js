@@ -17,8 +17,11 @@ const Camera = ({navigation}) => {
     }, []);
   
     const handleBarCodeScanned = ({ type, data }) => {
-      setScanned(true);
-      navigation.navigate('Detail', {product: getProduct(data)})
+      (async () => {
+        setScanned(true);
+        let product = await getProduct(data)
+        navigation.navigate('Detail', {product: product})
+      })()
     };
   
     if (hasPermission === null) {
