@@ -47,8 +47,9 @@ class DetailScreen extends React.Component {
             <View style={{ flex: 1, flexDirection: "row" }}>
                 <View style={styles.itemFullW}>
                   <Text style={styles.title}>Nutriments: </Text>
-                  <Text>Sucre/100g: {product.product.nutriments.sugars_100g ?? "Aucun ingrédients pour ce produit"}g</Text>
-                  <Text>Valeur énergétique/100g: {product.product.nutriments.energy_100g ?? "0"}{product.product.nutriments.energy_unit}</Text>
+                  <Text>Score: {product.product.nutriscore_data.score ?? "inconnu"}/100</Text>
+                  <Text>Sucre/100g: {product.product.nutriments.sugars_100g ?? "0g"}g</Text>
+                  <Text>Valeur énergétique: {product.product.nutriscore_data.energy ?? "0"}{product.product.nutriments.energy_unit}</Text>
                   <Text>Alcool: {product.product.nutriments.alcohol ?? "0"}%</Text>
                   <Text>Proteines: {product.product.nutriments.proteins ?? "0"}g</Text>
                   <Text>Sel: {product.product.nutriments.sodium ?? "0"}g</Text>
