@@ -8,6 +8,7 @@ import { createStackNavigator, HeaderTitle } from 'react-navigation-stack';
 import HomeScreen from './views/HomeScreen'
 import CameraScreen from './views/CameraScreen'
 import DetailScreen from './views/DetailScreen'
+import DetailProductScreen from './views/DetailProductScreen'
 
 const HomeStack = createStackNavigator(
     {
@@ -17,15 +18,33 @@ const HomeStack = createStackNavigator(
         headerTitleStyle: {color: "black"},
         headerStyle: {backgroundColor: "blue"}
       }) },
-      Detail: { screen: DetailScreen,
+
+      DetailProduct: { screen: DetailProductScreen,
         navigationOptions: ({navigation}) =>({
-          title: "DetailScreen",
+          title: "Detail Product Screen",
           headerTitleStyle: {color: "black"},
           headerStyle: {backgroundColor: "blue"}
         }) }
-  
     }
 );
+
+const CameraStack = createStackNavigator(
+    {
+        Camera: { screen: CameraScreen,
+            navigationOptions: ({navigation}) =>({
+              title: "CameraScreen",
+              headerTitleStyle: {color: "black"},
+              headerStyle: {backgroundColor: "blue"}
+            }) },
+
+        Detail: { screen: DetailScreen,
+            navigationOptions: ({navigation}) =>({
+              title: "Detail Screen",
+              headerTitleStyle: {color: "black"},
+              headerStyle: {backgroundColor: "blue"}
+            }) }
+    }
+)
 
 const TabNavigator = createBottomTabNavigator(
 {
@@ -47,7 +66,7 @@ const TabNavigator = createBottomTabNavigator(
     },
 
     Camera: {
-        screen: CameraScreen,
+        screen: CameraStack,
         navigationOptions: () => ({
             tabBarIcon: ({focused, tintColor }) => (
                 <Icon
@@ -72,7 +91,7 @@ const TabNavigator = createBottomTabNavigator(
     }
 );
 
-const AppContainer =  createAppContainer(TabNavigator, HomeStack);
+const AppContainer =  createAppContainer(TabNavigator, HomeStack, CameraStack);
 
 export default class App extends React.Component {
     render() {

@@ -28,7 +28,7 @@ const Camera = ({navigation}) => {
       return <Text>Requesting for camera permission</Text>;
     }
     if (hasPermission === false) {
-      return <Text>No access to camera</Text>; // HUGO EST UNE ENORME PUTE
+      return <Text>No access to camera</Text>;
     } 
     return(
         <View

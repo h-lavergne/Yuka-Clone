@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Button,Image, FlatList, ActivityIndicator } from 'react-native';
-import DetailScreen from "./DetailScreen"
+
 
 
 
@@ -52,7 +52,7 @@ export default class HomeScreen extends React.Component {
             </View>
 
             <Button title= "Detail du produit"
-           onPress = {() => {this.props.navigation.navigate("Detail")}}/>
+           onPress = {() => {this.props.navigation.navigate("DetailProduct", {product: item})}}/>
           
           </View>  }
            
