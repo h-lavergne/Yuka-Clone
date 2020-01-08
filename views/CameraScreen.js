@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { getProduct } from '../api/Api'
 
 
 
-
-const Camera = () => {
+const Camera = ({navigation}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
   
@@ -18,7 +18,7 @@ const Camera = () => {
   
     const handleBarCodeScanned = ({ type, data }) => {
       setScanned(true);
-      alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+      navigation.navigate('Detail', {product: getProduct(data)})
     };
   
     if (hasPermission === null) {

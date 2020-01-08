@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Icon } from 'native-base';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, HeaderTitle } from 'react-navigation-stack';
 
 import HomeScreen from './views/HomeScreen'
 import CameraScreen from './views/CameraScreen'
@@ -11,28 +11,41 @@ import DetailScreen from './views/DetailScreen'
 
 const HomeStack = createStackNavigator(
     {
-      Home: { screen: HomeScreen },
-      Detail: { screen: DetailScreen }
+      Home: { screen: HomeScreen,
+      navigationOptions: ({navigation}) =>({
+        title: "HomeScreen",
+        headerTitleStyle: {color: "black"},
+        headerStyle: {backgroundColor: "blue"}
+      }) },
+      Detail: { screen: DetailScreen,
+        navigationOptions: ({navigation}) =>({
+          title: "DetailScreen",
+          headerTitleStyle: {color: "black"},
+          headerStyle: {backgroundColor: "blue"}
+        }) }
+  
     }
 );
 
 const TabNavigator = createBottomTabNavigator(
 {
     Home: {
-        screen: HomeScreen,
+        screen: HomeStack,
         navigationOptions: () => ({
-            tabBarIcon: ({focused,tintColor}) => (
-                <Icon
-                    focused={focused}
-                    tintColor={{ tintColor }}
-                    name="home"
-                    color={tintColor}
-                    active={focused}
-                    size={24}
+            tabBarIcon: ({focused, tintColor }) => (
+                <Icon // ATTEND 2 SECONDES
+                  focused={focused}
+                  tintColor={{ tintColor }}
+                  name='home'
+                  color= {tintColor}
+                  size={24}
+                  style={{color:tintColor}}
                 />
-            ),
-        })
+          )
+        }) //VOILA 
+
     },
+
     Camera: {
         screen: CameraScreen,
         navigationOptions: () => ({
@@ -42,20 +55,27 @@ const TabNavigator = createBottomTabNavigator(
                     tintColor={{ tintColor }}
                     type="MaterialCommunityIcons"
                     name="barcode-scan"
-                    color={tintColor}
                     size={24}
+                    style={{color:tintColor}}
                 />
             ),
         })
     },
-    },
+},
     {
-    tabBarOptions: { 
-        showLabel: false,
-        activeTintColor: '#f0f',
-        inactiveTintColor: '#fff', 
+        tabBarOptions: { 
+            showIcon:true,
+            showLabel:false,
+            activeTintColor: 'blue',
+            inactiveTintColor: 'grey', 
+        }
     }
-}
 );
 
-export default createAppContainer(TabNavigator);
+const AppContainer =  createAppContainer(TabNavigator, HomeStack);
+
+export default class App extends React.Component {
+    render() {
+      return <AppContainer />;
+    }
+}
